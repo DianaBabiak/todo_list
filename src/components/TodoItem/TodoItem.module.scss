@@ -1,0 +1,23 @@
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  vertical-align: middle;
+
+  &:checked::before {
+    content: "✔";
+  }
+}
+
+.label{
+  font-size: 16px;
+  color: steelblue;
+}
+.isDone{
+  opacity: 0.5;
+}

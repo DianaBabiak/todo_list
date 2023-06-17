@@ -1,0 +1,42 @@
+.search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.legend{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  font-weight: bold;
+  color: cornflowerblue;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)
+
+
+}
+
+.button{
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: lightskyblue;
+  color: #fff;
+  border: solid 2px;
+  border-radius: 10px;
+  cursor: pointer;
+
+}
+.selectedButton{
+  background-color: darkkhaki;
+}
+.error {
+  border: red 1px solid
+}
+.errorMessage {
+  color:red;
+}
