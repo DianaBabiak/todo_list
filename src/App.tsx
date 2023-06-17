@@ -1,15 +1,9 @@
 import {Todo} from "./components/Todo/Todo.tsx";
 import styles from "./components/App.module.scss"
 import {useState} from "react";
-import {handleCheckboxClickPropsType, TTodo, TTodoItem} from "./types.ts"
+import {HandleCheckboxClickProps, TTodo, TTodoItem} from "./types.ts"
 import {AddTodo} from "./components/AddTodo/AddTodo.tsx";
-import {handleChangeLabelPropsType} from "./types.ts"
-// const data: TodoProps[] = [
-//     {title:'Programing' , items:[{label:'JS',checked: true},{label:'CSS',checked:false},{label:'React',checked:true}]},
-//     {title:'Drinks',items:[{label:'Water',checked: false},{label:'Coffee',checked:false}, {label:'Tea',checked:true}]},
-//     {title:'Movies',items:[{label:'1+1',checked: true},{label:'Blond',checked:true},{label:'Cars',checked:true}]},
-//     {title:'Family',items:[{label:'Dziana',checked: true},{label:'Kiryl',checked:true},{label:'Sofiya',checked:true}]}
-// ]
+import {HandleChangeLabelProps} from "./types.ts"
 
 function App() {
     const [data, setData] = useState<TTodo[]>([
@@ -49,10 +43,10 @@ function App() {
             ]
         }
     ])
-    const handleDeleteTodoItem = (idTodo: number, idItems: number) => {
+    const handleDeleteTodoItem = (idTodo: number, idItem: number) => {
         const updatedData = data.map((todo) => {
             if (idTodo === todo.id) {
-                const filterTodoItems = todo.items.filter((el) => idItems !== el.id)
+                const filterTodoItems = todo.items.filter((el) => idItem !== el.id)
                 return {...todo, items: filterTodoItems}
             }
             return todo
@@ -75,9 +69,9 @@ function App() {
 
     const handleAddTodoItem = (label: string, todoId:number) => {
         const newTodoItem: TTodoItem={
-            id: 10, label: label, checked: false
+            id: new Date().getTime(), label, checked: false
         }
-        const apdatedTodo = data.map((todo)=>{
+        const updatedTodos = data.map((todo)=>{
             if (todoId===todo.id){
                 const lastArrayElementIndex=todo.items.length-1
                 const lastItem= todo.items[lastArrayElementIndex]
@@ -89,10 +83,10 @@ function App() {
         return todo
         })
 
-        setData(apdatedTodo)
+        setData(updatedTodos)
     }
-    const handleChangeLabel =({newLabel,todoId,itemId}:handleChangeLabelPropsType)=>{
-        const changeLabel = data.map((todo)=>{
+    const handleChangeLabel =({newLabel,todoId,itemId}:HandleChangeLabelProps)=>{
+        const changeData = data.map((todo)=>{
             if (todo.id===todoId){
                 todo.items.map((item)=>{
                     if (item.id===itemId){
@@ -103,23 +97,23 @@ function App() {
             }
             return todo
         })
-        setData(changeLabel)
+        setData(changeData)
     }
 
-    const handlerChangeTodoTitle=(idTodo:number, newLabel:string)=>{
-        const aptadedTodo = data.map((todo)=>{
+    const handleChangeTodoTitle=(idTodo:number, newLabel:string)=>{
+        const updatedTodos = data.map((todo)=>{
            if (idTodo===todo.id){
                todo.title=newLabel
            }
            return todo
         })
-        setData(aptadedTodo)
+        setData(updatedTodos)
 
     }
 
 
-    const handleCheckboxClick = ({idTodo,idItem,checkedItem}:handleCheckboxClickPropsType)=>{
-        const newApdatedTodo = data.map((todo)=>{
+    const handleCheckboxClick = ({idTodo,idItem,checkedItem}:HandleCheckboxClickProps)=>{
+        const newUpdatedTodos = data.map((todo)=>{
             if (todo.id===idTodo) {
                 todo.items.map ((item)=>{
                     if (item.id===idItem) {
@@ -130,14 +124,14 @@ function App() {
             }
             return todo
         })
-        setData(newApdatedTodo)
+        setData(newUpdatedTodos)
     }
 
     return (
         <div className={styles.main}>
            <AddTodo handleAddTodo={handleAddTodo}/>
             {data.map(item => {
-                return <Todo key={item.id} handlerChangeTodoTitle={handlerChangeTodoTitle} onChangeLabel={handleChangeLabel} onCheckboxClick={handleCheckboxClick} onAddTodoItem={handleAddTodoItem} onDeleteTodo={handleDeleteTodo} id={item.id}
+                return <Todo key={item.id} handlerChangeTodoTitle={handleChangeTodoTitle} onChangeLabel={handleChangeLabel} onCheckboxClick={handleCheckboxClick} onAddTodoItem={handleAddTodoItem} onDeleteTodo={handleDeleteTodo} id={item.id}
                              onDeleteTodoItem={handleDeleteTodoItem} title={item.title} items={item.items}/>
             })}
         </div>

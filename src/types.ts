@@ -10,14 +10,20 @@ export interface TTodoItem {
     id:number
 }
 
-export interface handleChangeLabelPropsType {
+export interface HandleChangeLabelProps {
     newLabel: string
     todoId: number
     itemId: number
 }
 
-export interface handleCheckboxClickPropsType {
+export interface HandleCheckboxClickProps {
     idTodo: number
     idItem: number
     checkedItem:boolean
+}
+
+export enum TodoItemStatus {
+    All = 'All',
+    Active = 'Active',
+    Completed='Completed'
 }

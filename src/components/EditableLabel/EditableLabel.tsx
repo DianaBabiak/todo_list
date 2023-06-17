@@ -1,11 +1,11 @@
 import {ChangeEvent, useState} from "react";
 
-interface EditableLabelPropsType {
+interface EditableLabelProps {
     label: string
     onChangeLabel:(newLabel:string)=>void
 }
 
-export function EditableLabel({label, onChangeLabel}: EditableLabelPropsType) {
+export function EditableLabel({label, onChangeLabel}: EditableLabelProps) {
     const [editState, setEditState] = useState(false)
     const [changeLabel, setChangeLabel] = useState('')
     const onDoubleClick = () => {
